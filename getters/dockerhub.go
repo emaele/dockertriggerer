@@ -17,23 +17,24 @@ func GetDockerHubRepoInfo(repoName string) (types.DockerHubRepoInfo, error) {
 
 	resp, err := http.Get(fmt.Sprintf(constants.DockerHubInfoEndpoint, repoName))
 	if err != nil {
-		//TODO: Handle error
+		return repoInfo, err
 	}
 
 	jdec := json.NewDecoder(resp.Body)
 	err = jdec.Decode(&repoInfo)
 	if err != nil {
-		//TODO: Handle error
+		return repoInfo, err
 	}
 
 	err = resp.Body.Close()
 	if err != nil {
-		//TODO: Handle error
+		return repoInfo, err
 	}
 
 	return repoInfo, nil
 }
 
+//TriggerBuild will send the POST request that triggers a dockerhub build
 func TriggerBuild(endpoint string) error {
 	var client http.Client
 	var reader io.Reader

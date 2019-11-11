@@ -15,18 +15,18 @@ func GetLastCommit(repoName string) (types.GithubCommit, error) {
 
 	resp, err := http.Get(fmt.Sprintf(constants.GithubCommitEndpoint, repoName))
 	if err != nil {
-		//TODO: Handle error
+		return lastCommit, err
 	}
 
 	jdec := json.NewDecoder(resp.Body)
 	err = jdec.Decode(&lastCommit)
 	if err != nil {
-		//TODO: Handle error
+		return lastCommit, err
 	}
 
 	err = resp.Body.Close()
 	if err != nil {
-		//TODO: Handle error
+		return lastCommit, err
 	}
 
 	return lastCommit, nil
