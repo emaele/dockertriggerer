@@ -36,29 +36,8 @@ type GithubCommit struct {
 }
 
 type DockerHubRepoInfo struct {
-	Count    int         `json:"count"`
-	Next     interface{} `json:"next"`
-	Previous interface{} `json:"previous"`
-	Results  []struct {
-		Name     string `json:"name"`
-		FullSize int    `json:"full_size"`
-		Images   []struct {
-			Size         int         `json:"size"`
-			Digest       string      `json:"digest"`
-			Architecture string      `json:"architecture"`
-			Os           string      `json:"os"`
-			OsVersion    interface{} `json:"os_version"`
-			OsFeatures   string      `json:"os_features"`
-			Variant      interface{} `json:"variant"`
-			Features     string      `json:"features"`
-		} `json:"images"`
-		ID                  int         `json:"id"`
-		Repository          int         `json:"repository"`
-		Creator             int         `json:"creator"`
-		LastUpdater         int         `json:"last_updater"`
-		LastUpdaterUsername string      `json:"last_updater_username"`
-		ImageID             interface{} `json:"image_id"`
-		V2                  bool        `json:"v2"`
-		LastUpdated         time.Time   `json:"last_updated"`
-	} `json:"results"`
+	Name        string    `json:"name"`
+	ID          int       `json:"id"`
+	Repository  int       `json:"repository"`
+	LastUpdated time.Time `json:"last_updated"`
 }
