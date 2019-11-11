@@ -10,10 +10,10 @@ import (
 )
 
 //GetLastCommit will return the last master commit
-func GetLastCommit(org, repoName string) (types.GithubCommit, error) {
+func GetLastCommit(repoName string) (types.GithubCommit, error) {
 	var lastCommit types.GithubCommit
 
-	resp, err := http.Get(fmt.Sprintf(constants.GithubCommitEndpoint, org, repoName))
+	resp, err := http.Get(fmt.Sprintf(constants.GithubCommitEndpoint, repoName))
 	if err != nil {
 		//TODO: Handle error
 	}
