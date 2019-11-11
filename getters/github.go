@@ -2,6 +2,7 @@ package getters
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -16,6 +17,10 @@ func GetLastCommit(repoName string) (types.GithubCommit, error) {
 	resp, err := http.Get(fmt.Sprintf(constants.GithubCommitEndpoint, repoName))
 	if err != nil {
 		return lastCommit, err
+	}
+
+	if resp.StatusCode != 200 {
+		return lastCommit, errors.New(resp.Status)
 	}
 
 	jdec := json.NewDecoder(resp.Body)

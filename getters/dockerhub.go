@@ -20,6 +20,10 @@ func GetDockerHubRepoInfo(repoName string) (types.DockerHubRepoInfo, error) {
 		return repoInfo, err
 	}
 
+	if resp.StatusCode != 200 {
+		return repoInfo, errors.New(resp.Status)
+	}
+
 	jdec := json.NewDecoder(resp.Body)
 	err = jdec.Decode(&repoInfo)
 	if err != nil {
@@ -42,6 +46,10 @@ func TriggerBuild(endpoint string) error {
 	resp, err := client.Post(endpoint, "", reader)
 	if err != nil {
 		return err
+	}
+
+	if resp.StatusCode != 200 {
+		return errors.New(resp.Status)
 	}
 
 	var postResult types.BuildTriggerResponse
